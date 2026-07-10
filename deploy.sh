@@ -13,6 +13,12 @@ rm -rf frontend/dist
 docker cp shrishti-frontend-tmp:/app/dist ./frontend/dist
 docker rm shrishti-frontend-tmp
 
+if [ ! -f frontend/dist/index.html ]; then
+  echo "ERROR: frontend build failed — frontend/dist/index.html is missing"
+  exit 1
+fi
+
+echo "==> Frontend build OK"
 echo "==> Starting containers..."
 docker compose up -d --build
 

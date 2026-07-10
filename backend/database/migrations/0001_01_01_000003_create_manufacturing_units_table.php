@@ -10,6 +10,10 @@ return new class extends Migration
     {
         Schema::dropIfExists('batches');
 
+        if (Schema::hasTable('manufacturing_units')) {
+            return;
+        }
+
         Schema::create('manufacturing_units', function (Blueprint $table) {
             $table->id();
             $table->string('batch_code', 10)->unique();
