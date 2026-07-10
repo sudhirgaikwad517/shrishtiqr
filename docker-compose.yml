@@ -26,6 +26,7 @@ services:
       DB_PORT: 5432
     volumes:
       - ./backend:/var/www/html
+      - backend_vendor:/var/www/html/vendor
     depends_on:
       db:
         condition: service_healthy
@@ -44,3 +45,4 @@ services:
 
 volumes:
   pgdata:
+  backend_vendor:

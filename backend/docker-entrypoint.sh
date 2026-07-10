@@ -6,6 +6,11 @@ if [ ! -f .env ]; then
   exit 1
 fi
 
+if [ ! -f vendor/autoload.php ]; then
+  echo "Installing Composer dependencies..."
+  composer install --no-dev --optimize-autoloader --no-interaction
+fi
+
 php artisan config:clear
 php artisan migrate --force
 php artisan config:cache
