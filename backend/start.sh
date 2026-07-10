@@ -8,5 +8,5 @@ if [ ! -f vendor/autoload.php ]; then
   composer install --no-dev --optimize-autoloader --no-interaction
 fi
 
-echo "Starting Laravel on port 8000..."
+echo "Starting Laravel on port 8000 (v2-artisan-serve)..."
 exec php artisan serve --host=0.0.0.0 --port=8000
