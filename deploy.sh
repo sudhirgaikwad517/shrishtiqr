@@ -19,6 +19,11 @@ docker compose up -d --build
 echo "==> Installing backend dependencies..."
 docker compose exec -T backend composer install --no-dev --optimize-autoloader --no-interaction
 
+echo "==> Running migrations..."
+docker compose exec -T backend php artisan migrate --force
+docker compose exec -T backend php artisan config:cache
+docker compose exec -T backend php artisan route:cache
+
 echo "==> Generating APP_KEY if missing..."
 docker compose exec -T backend sh -lc 'grep -q "^APP_KEY=base64:" .env || php artisan key:generate --force'
 
