@@ -20,7 +20,17 @@ fi
 
 echo "==> Frontend build OK"
 echo "==> Starting containers..."
-docker compose up -d --build
+docker compose build --no-cache backend
+docker compose up -d --force-recreate
+
+echo "==> Waiting for backend..."
+sleep 5
+
+if ! docker compose ps backend | grep -q "Up"; then
+  echo "ERROR: backend container is not running. Logs:"
+  docker compose logs backend --tail 40
+  exit 1
+fi
 
 echo "==> Installing backend dependencies..."
 docker compose exec -T backend composer install --no-dev --optimize-autoloader --no-interaction
