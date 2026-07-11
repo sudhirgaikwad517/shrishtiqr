@@ -10,7 +10,7 @@ export default function AddressTable({ units, loading }: Props) {
     <div className="mt-5 w-full overflow-hidden rounded-lg border border-slate-200">
       <table className="w-full table-fixed border-collapse text-left">
         <thead>
-          <tr className="bg-slate-100 text-slate-700">
+          <tr className="bg-[#e8f0fa] text-[#1a4f8f]">
             <th className="w-[12%] border border-slate-200 px-1.5 py-3.5 text-center text-xs font-semibold sm:w-[8%] sm:px-3 sm:text-sm">
               Sr.
             </th>
@@ -55,7 +55,7 @@ export default function AddressTable({ units, loading }: Props) {
                   <div className="mt-2">{unit.address}</div>
                   <div className="mt-3">
                     <span className="text-slate-700">FSSAI Lic. No. </span>
-                    <span className="font-semibold break-all text-blue-700">
+                    <span className="font-semibold break-all text-[#1a4f8f]">
                       {unit.fssai_licence_number}
                     </span>
                   </div>
