@@ -44,12 +44,11 @@ sleep 8
 docker compose ps
 docker compose logs backend --tail 15
 
-echo "==> Run migrations & seed..."
+echo "==> Run migrations (no seed — admin data must not be overwritten)..."
 docker compose exec -T backend composer install --no-dev --optimize-autoloader --no-interaction
 docker compose exec -T backend php artisan migrate --force
 docker compose exec -T backend php artisan config:cache
 docker compose exec -T backend php artisan route:cache
-docker compose exec -T backend php artisan db:seed --force || true
 
 echo "==> Test API..."
 curl -s http://localhost/api/manufacturing-units | head -c 200

@@ -11,9 +11,10 @@ class DatabaseSeeder extends Seeder
 
     /**
      * Seed the application's database.
+     * Do not seed manufacturing units — admin owns that data.
      */
     public function run(): void
     {
-        $this->call(ManufacturingUnitSeeder::class);
+        // intentionally empty
     }
 }

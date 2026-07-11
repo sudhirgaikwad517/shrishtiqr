@@ -44,6 +44,5 @@ echo "==> Generating APP_KEY if missing..."
 docker compose exec -T backend sh -lc 'grep -q "^APP_KEY=base64:" .env || php artisan key:generate --force'
 
 echo "==> Done!"
-echo "Note: DB seed is skipped on deploy so admin data is not overwritten."
-echo "First-time only: docker compose exec -T backend php artisan db:seed --force"
+echo "Note: deploy never seeds manufacturing units. Manage rows only in Admin."
 echo "Site: check PUBLIC_PAGE_URL in backend/.env"
