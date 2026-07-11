@@ -9,6 +9,11 @@ class ManufacturingUnitSeeder extends Seeder
 {
     public function run(): void
     {
+        // Never overwrite admin-edited data on re-deploy
+        if (ManufacturingUnit::query()->exists()) {
+            return;
+        }
+
         $units = [
             [
                 'batch_code' => 'RU',
