@@ -49,6 +49,7 @@ docker compose exec -T backend composer install --no-dev --optimize-autoloader -
 docker compose exec -T backend php artisan migrate --force
 docker compose exec -T backend php artisan config:cache
 docker compose exec -T backend php artisan route:cache
+docker compose exec -T backend php artisan manufacturing-units:purge-demo
 
 echo "==> Test API..."
 curl -s http://localhost/api/manufacturing-units | head -c 200

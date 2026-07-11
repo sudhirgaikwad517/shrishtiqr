@@ -43,6 +43,14 @@ docker compose exec -T backend php artisan route:cache
 echo "==> Generating APP_KEY if missing..."
 docker compose exec -T backend sh -lc 'grep -q "^APP_KEY=base64:" .env || php artisan key:generate --force'
 
+# HARD GUARD: never seed manufacturing units on deploy
+if grep -RIn --include='*.sh' 'db:seed' . 2>/dev/null | grep -v '^\./scripts/vps-fix.sh' | grep -q .; then
+  echo "WARNING: found db:seed references — manufacturing unit seed must stay disabled"
+fi
+
+echo "==> Purging old demo manufacturing units (RU/PI/SD)..."
+docker compose exec -T backend php artisan manufacturing-units:purge-demo
+
 echo "==> Done!"
 echo "Note: deploy never seeds manufacturing units. Manage rows only in Admin."
 echo "Site: check PUBLIC_PAGE_URL in backend/.env"
